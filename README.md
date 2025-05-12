@@ -12,3 +12,7 @@ rivedere sotto angolazioni diverse quello che imparate a lezione:
 - https://amzn.to/3FaHX7N PHP 8. Guida allo sviluppo web (un po' più avanzato)
 - se volete approfondire Git e Github vi consiglio questo https://amzn.to/3Swftsh e questo https://amzn.to/3GLxj7Z
 - infine se siete anglofoni questo https://amzn.to/4kklUe1 è un testo eccezionale sulla scrittura di buon codice in PHP
+
+# link-o-grafia
+- https://www.html.it/guide/guida-php-di-base/
+- https://www.php.net/manual/it/
