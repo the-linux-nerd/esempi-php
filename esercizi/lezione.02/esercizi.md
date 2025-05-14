@@ -1,4 +1,4 @@
-# esercizi di PHP
+# esercizi della seconda lezione
 In questo file trovate esercizi aggiuntivi relativi alla lezione due.
 
 ## esercizio 1
