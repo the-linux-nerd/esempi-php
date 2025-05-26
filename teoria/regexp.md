@@ -25,3 +25,52 @@ $                  | la fine della stringa
 \-                 | specifica una serie di elementi o un intervallo (es. 0-9)
 \|                 | l'operatore OR
 \                  | escape per i caratteri speciali
+
+Le classi di caratteri sono utilizzate per indicare degli insiemi di caratteri; vediamo qualche esempio:
+
+classe             | significato
+-------------------|----------------------------------------------------------------
+[abc]              | uno qualunque tra i caratteri a, b o c
+[^abc]             | qualsiasi carattere tranne a, b o c
+[a-z]              | qualsiasi carattere compreso fra a minuscola e z minuscola
+[A-Z]              | qualsiasi carattere compreso fra a maiuscola e z maiuscola
+[0-9]              | qualsiasi numero fra 0 e 9
+[a-z0-9]           | qualsiasi carattere fra a minuscola e z minuscola e qualsiasi numero fra 0 e 9
+
+Esistono delle classi predefinite, che possono essere utilizzate per semplificare le espressioni regolari e renderle più leggibili:
+
+classe             | significato
+-------------------|--------------------------------------------------------
+\d                 | qualsiasi carattere numerico, equivale a [0-9]
+\D                 | qualsiasi carattere diverso da una cifra, equivale a [^0-9]
+\s                 | qualsiasi carattere di spaziatura (spazio, tabulazione, carattere di ritorno a capo), equivale a [\t\n\r]
+\S                 | qualsiasi carattere diverso da spaziatura, equivale a [^\t\n\r]
+\w                 | qualsiasi carattere alfanumerico, equivale a [a-zA-Z0-9_]
+\W                 | qualsiasi carattere non alfanumerico, equivale a [^a-zA-Z0-9_]
+
+Le espressioni regolari prevedono dei quantificatori che specificano il numero di occorrenze di una data stringa o classe, ad esempio:
+
+quantificatore     | significato
+-------------------|---------------------------------------------------------------
+a+                 | una o più occorrenze della lettera a
+a*                 | zero o più occorrenze della lettera a
+a?                 | zero o una occorrenza della lettera a
+a{2}               | esattamente due occorrenze della lettera a
+a{2,4}             | almeno due ma non più di quattro occorrenze della lettera a
+a{2,}              | due o più occorrenze della lettera a
+a{,4}              | al massimo quattro occorrenze della lettera a
+
+Dopo la slash di chiusura dell'espressione regolare è possibile indicare dei modificatori che ne specificano il comportamento:
+
+modificatore       | significato
+-------------------|---------------------------------------------------------------
+i                  | esegue una ricerca case-insensitive
+m                  | applica le ancore ^ e $ ad ogni riga di testo
+g                  | esegue una ricerca "globale", ossia trova tutte le occorrenze senza fermarsi alla prima
+o                  | valuta l'espressione regolare solamente una volta
+s                  | fa in modo che . corrisponda a tutti i caratteri, comprese le nuove righe
+x                  | consente di utilizzare spazi bianchi e commenti all'interno di un'espressione regolare per maggiore chiarezza
+
+# link-o-grafia
+- https://regex101.com/
+- https://www.youtube.com/watch?v=8FFTOKi7nHo
