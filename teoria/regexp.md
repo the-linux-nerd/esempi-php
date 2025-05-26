@@ -13,8 +13,8 @@ Le espressioni regolari sono semplici stringhe delimitate da slash (/) all'inter
 
 carattere          | significato
 -------------------|------------------------------------------
-+                  | una o più occorrenze di un carattere o di un gruppo di caratteri
-*                  | zero o più occorrenze (di un carattere o di un gruppo di caratteri)
+\+                 | una o più occorrenze di un carattere o di un gruppo di caratteri
+\*                 | zero o più occorrenze (di un carattere o di un gruppo di caratteri)
 ?                  | zero o una occorrenza (di un carattere o di un gruppo di caratteri)
 []                 | delimitano una classe di caratteri
 ^                  | fuori da una classe indica l'inizio della stringa, all'interno di una classe funge da negazione
@@ -22,6 +22,6 @@ carattere          | significato
 $                  | la fine della stringa
 ()                 | delimitano una sottostringa
 {}                 | indicano il numero esatto, minimo o massimo o l'intervallo di occorrenze di un carattere o di un gruppo di caratteri
--                  | specifica una serie di elementi o un intervallo (es. 0-9)
+\-                 | specifica una serie di elementi o un intervallo (es. 0-9)
 \|                 | l'operatore OR
 \                  | escape per i caratteri speciali
