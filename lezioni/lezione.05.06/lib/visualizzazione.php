@@ -25,7 +25,7 @@
         // creo il menu saltando la pagina non trovata
         foreach ($pagine as $key => $pagina) {
             if ($key != 0) {
-                $menu .= '<li><a href="?pagina=' . $key . '">' . $pagina['titolo'] . '</a></li>';
+                $menu .= '<li><a href="?pagina=' . $key . '">' . $pagina['dati']['titolo'] . '</a></li>';
             }
         }
 
