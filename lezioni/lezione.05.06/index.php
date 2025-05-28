@@ -10,7 +10,7 @@
     }
 
     // faccio il parsing del template
-    $output = renderizza('tpl/'.$pagina['template'], $pagina);
+    $output = renderizza('tpl/'.$pagina['template'], $pagina['dati']);
     $output = creaMenu('{{menu}}', $pagine, $output);
 
     // inclusioni specifiche di pagina
