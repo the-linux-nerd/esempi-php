@@ -1,8 +1,19 @@
 # come progettare un'applicazione web
 In questo breve articolo vediamo alcuni approcci possibili per la progettazione di un'applicazione web. Prima di iniziare a progettarne una, tuttavia,
-dobbiamo capire come è strutturata:
+dobbiamo capire come questo tipo di applicazioni sono strutturate:
 
 ![Untitled 1](https://github.com/user-attachments/assets/d9494ffc-dc67-47c7-bebc-519ee4dc1032)
+
+Tipicamente PHP è il cuore dell'applicazione, e si occupa di tutte le elaborazioni dati importanti. Il suo output, in forma di pagine HTML, è inviato
+al client dove avvengono la renderizzazione della pagina, tramite anche i CSS eventualmente inclusi, e le elaborazioni lato client tramite JavaScript,
+se presenti.
+
+JavaScript a sua volta può chiamare direttamente il backend PHP per inviare e ricevere dati, solitamente tramite chiamate REST verso apposite API
+esposte dal backend.
+
+Lato storage, il backend PHP dispone solitamente del filesystem per l'archiviazione di file, e di un database, spesso MySQL, per l'archiviazione dei
+dati strutturati secondo il modello relazionale; è possibile inoltre che sia presente un database non relazionale di qualche tipo, oltre a vari sistemi
+di cache come Memcache e Redis.
 
 ## approccio per file
 L'approccio più intuitivo è quello di creare un file PHP per ogni pagina della nostra applicazione. Se per esempio dobbiamo creare un'applicazione che
