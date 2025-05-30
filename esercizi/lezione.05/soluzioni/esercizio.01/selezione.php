@@ -1,15 +1,5 @@
 <?php
 
-    $form = array(
-        'selectFigure' => array(
-            'options' => array(
-                '1' => 'triangolo',
-                '2' => 'rettangolo',
-                '3' => 'cerchio'
-            )
-        )
-    );
-
     $pagina = array(
         'dati' => array(
             'titolo' => 'selezione figure',
@@ -21,13 +11,23 @@
 
     $contenuto = file_get_contents($pagina['template']);
 
+    foreach ($pagina['dati'] as $key => $value) {
+        $contenuto = str_replace('{{' . $key . '}}', $value, $contenuto); 
+    }
+
+    $form = array(
+        'selectFigure' => array(
+            'options' => array(
+                '1' => 'triangolo',
+                '2' => 'rettangolo',
+                '3' => 'cerchio'
+            )
+        )
+    );
+
     $select = '';
     foreach ($form['selectFigure']['options'] as $key => $value) {
         $select .= '<option value="' . $key . '">' . $value . '</option>';
-    }
-
-    foreach ($pagina['dati'] as $key => $value) {
-        $contenuto = str_replace('{{' . $key . '}}', $value, $contenuto); 
     }
 
     $contenuto = str_replace('{{selectFigure}}', $select, $contenuto);

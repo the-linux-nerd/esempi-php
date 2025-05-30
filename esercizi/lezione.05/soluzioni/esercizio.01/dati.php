@@ -11,7 +11,11 @@
 
     $contenuto = file_get_contents($pagina['dati']['template']);
 
-    switch( $_REQUEST['figure'] ) {
+    foreach ($pagina['dati'] as $key => $value) {
+        $contenuto = str_replace('{{' . $key . '}}', $value, $contenuto); 
+    }
+
+    switch( $_POST['figure'] ) {
         case '1':
             $pagina['dati']['h1'] = 'calcolo area triangolo';
             $form = array(
@@ -81,10 +85,6 @@
             $formFigure .= ' value="' . $input['value'] . '"';
         }
         $formFigure .= '>';
-    }
-
-    foreach ($pagina['dati'] as $key => $value) {
-        $contenuto = str_replace('{{' . $key . '}}', $value, $contenuto); 
     }
 
     $contenuto = str_replace('{{formFigure}}', $formFigure, $contenuto);
