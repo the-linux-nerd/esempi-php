@@ -16,17 +16,15 @@
     }
 
     $form = array(
-        'selectFigure' => array(
-            'options' => array(
-                '1' => 'triangolo',
-                '2' => 'rettangolo',
-                '3' => 'cerchio'
-            )
+        'options' => array(
+            '1' => 'triangolo',
+            '2' => 'rettangolo',
+            '3' => 'cerchio'
         )
     );
 
     $select = '';
-    foreach ($form['selectFigure']['options'] as $key => $value) {
+    foreach ($form['options'] as $key => $value) {
         $select .= '<option value="' . $key . '">' . $value . '</option>';
     }
 
