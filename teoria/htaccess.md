@@ -58,6 +58,13 @@ RewriteCond %{HTTP_REFERER} !^$
 RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?dominio.com [NC]
 RewriteRule \.(jpg|jpeg|png|gif|bmp)$ - [NC,F,L]
 ```
+### esempio 05
+Catturare tutte le pagine:
+```
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-zA-Z0-9_\-\/\.]+) _src/_api/_pages.php?__rw__=$1&__lg__=$2 [L,QSA]
+```
 
 # link-o-grafia
 - https://httpd.apache.org/docs/2.4/howto/htaccess.html
