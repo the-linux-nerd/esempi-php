@@ -71,6 +71,25 @@ o                  | valuta l'espressione regolare solamente una volta
 s                  | fa in modo che . corrisponda a tutti i caratteri, comprese le nuove righe
 x                  | consente di utilizzare spazi bianchi e commenti all'interno di un'espressione regolare per maggiore chiarezza
 
+## esempi
+
+### fare il match di un numero con virgola:
+```
+[0-9]+[,]?[0-9]*
+```
+### trovare il peso in grammi
+```
+[0-9]+[,]?[0-9]*[\s]?gr
+```
+che può essere semplificata in
+```
+[0-9,\s]+gr
+```
+il numero può essere estratto con un sotto gruppo:
+```
+([0-9,]+)[\s]*gr
+```
+
 # link-o-grafia
 - https://regex101.com/
 - https://www.youtube.com/watch?v=8FFTOKi7nHo
