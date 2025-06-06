@@ -19,14 +19,18 @@ di cache come Memcache e Redis.
 Per prima cosa analizzare la struttura logica dell'applicazione che si deve realizzare. Quali pagine occorreranno? Quali librerie? Quali template?
 Disegnare ogni file come un rettangolo in uno schema; poi collegare fra loro i vari file con delle linee che rappresentino il tipo di relazione che
 si è pensata fra quei file:
+
 - verde per i passaggi di dati (GET e POST)
 - blu per gli include e i require
 - rosso per la lettura diretta (ad es. tramite file_get_contents())
+
 Una volta disegnato lo schema, procedere creando tutti i file vuoti, e inserire in ogni file una serie di brevi commenti che ne illustrino il funzionamento,
 ma senza scrivere il codice. Fatto questo per tutti i file, si può iniziare a scrivere il codice, in questo ordine:
+
 - template HTML
 - librerie
 - file PHP specifici per le varie pagine
+
 Rispettando questo approccio si riuscirà a sviluppare in maniera più sistematica e strutturata, sprecando meno tempo e facendo meno errori.
 
 ## approccio per file
