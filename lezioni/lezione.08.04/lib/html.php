@@ -18,7 +18,7 @@
         
         $t = '<' . $tag;
         foreach ($attr as $key => $value) {
-            $t .= ' ' . $key . '="' . htmlspecialchars($value) . '"';
+            $t .= ' ' . $key . ( ( ! empty( $value ) ) ? '="' . htmlspecialchars($value) . '"' : '' );
         }
         $t .= '>';
         if( ! empty($content) ) {
@@ -29,4 +29,25 @@
         return $t;
 
     }
-    
+
+    /**
+     * genera un form HTML
+     * @param array $attr un array associativo con gli attributi del form
+     * @param array $fields un array associativo con i campi del form
+     * @return string il form HTML generato
+     */
+    function form($attr = [], $fields = []) {
+
+        $form = [];
+        foreach($fields as $name => $attributi) {
+            $form[] = tag(
+                $attributi['field'],
+                $attributi
+            );
+        }
+
+        $t = tag('form', $attr, implode(PHP_EOL, $form));
+
+        return $t;
+
+    }
