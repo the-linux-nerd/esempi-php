@@ -1,8 +1,7 @@
 <?php
 
     /**
-     * libreria che genera tag HTML con un approccio
-     * generalista
+     * libreria che genera tag HTML con un approccio generalista
      */
 
     namespace HTML;

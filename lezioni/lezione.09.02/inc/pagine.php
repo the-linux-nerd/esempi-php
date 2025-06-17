@@ -1,9 +1,8 @@
 <?php
 
     /**
-     * qui sono dichiarate le pagine e le logiche valide per tutte le pagine
+     * elenco delle pagine disponibili
      */
-
     $pagine = array(
         'lista-cani' => array(
             'contenuto' => array(
@@ -12,25 +11,25 @@
                 'testo' => '',
             ),
             'template' => 'tpl/main.html',
-            'include' => [ 'lib/cani.php', 'inc/cani.lista.php' ],
-        ),
-        'gestione-cani' => array(
-            'contenuto' => array(
-                'titolo' => 'gestione cani',
-                'h1' => 'gestione cani',
-                'testo' => '',
-            ),
-            'template' => 'tpl/main.html',
-            'include' => [ 'lib/cani.php', 'inc/cani.gestione.php' ],
+            'include' => [ 'mod/cani.lib.php', 'mod/cani.mod.php' ],
         ),
     );
 
+    /**
+     * pagina di default
+     */
     if (!isset($_REQUEST['p']) || !isset($pagine[$_REQUEST['p']])) {
         $_REQUEST['p'] = 'lista-cani';
     }
 
+    /**
+     * scorciatoia per la pagina richiesta
+     */
     $p = $pagine[$_REQUEST['p']];
 
+    /**
+     * menu di navigazione
+     */
     $voci = [];
     foreach ($pagine as $key => $value) {
         $voci[] = HTML\tag(
