@@ -7,10 +7,10 @@
     /**
      * modifica, inserimento e cancellazione
      */
-    if (isset($_REQUEST['nome']) && isset($_REQUEST['anno_nascita']) && isset($_REQUEST['id'])) {
+    if (isset($_REQUEST['nome']) && isset($_REQUEST['anno_nascita']) && isset( $_REQUEST['padrone'] ) && isset($_REQUEST['id'])) {
         if ($_REQUEST['nome'] != '' && $_REQUEST['anno_nascita'] != '') {
             $p['contenuto']['testo'] = 'modifico ' . $_REQUEST['nome'] . ' con anno nascita ' . $_REQUEST['anno_nascita'];
-            $r = Cani\modifica($_REQUEST['id'], $_REQUEST['nome'], $_REQUEST['anno_nascita']);
+            $r = Cani\modifica($_REQUEST['id'], $_REQUEST['nome'], $_REQUEST['anno_nascita'], $_REQUEST['padrone']);
             if ($r) {
                 $p['contenuto']['testo'] .= ' - modifica riuscita';
             } else {
@@ -19,10 +19,10 @@
         } else {
             $p['contenuto']['testo'] = 'modifica fallita: nome o anno nascita non validi';
         }
-    } elseif (isset($_REQUEST['nome']) && isset($_REQUEST['anno_nascita'])) {
+    } elseif (isset($_REQUEST['nome']) && isset($_REQUEST['anno_nascita']) && isset($_REQUEST['padrone'])) {
         if ($_REQUEST['nome'] != '' && $_REQUEST['anno_nascita'] != '') {
             $p['contenuto']['testo'] = 'aggiungo ' . $_REQUEST['nome'] . ' con anno nascita ' . $_REQUEST['anno_nascita'];
-            $r = Cani\aggiungi($_REQUEST['nome'], $_REQUEST['anno_nascita']);
+            $r = Cani\aggiungi($_REQUEST['nome'], $_REQUEST['anno_nascita'], $_REQUEST['padrone']);
             if ($r) {
                 $p['contenuto']['testo'] .= ' - aggiunta riuscita';
             } else {
@@ -48,4 +48,4 @@
     /**
      * elenco
      */
-    $rubrica = Cani\lista();
+    $cani = Cani\lista();
