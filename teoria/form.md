@@ -17,3 +17,4 @@ posso avere nel file form.php il seguente codice valido:
 ```
 echo 'la somma di A e B è ' . ( $_POST['a'] + $_POST['b'] ) . '<br>';
 ```
+Gli array associativi $_POST e $_GET sono riuniti nell'array generale $_REQUEST.
