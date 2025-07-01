@@ -99,13 +99,101 @@ file PHP                 | file HTML              | spiegazione
 -------------------------|------------------------|--------------------------------
 lib/calcoli.php          | -                      | libreria contenente le funzioni di calcolo delle aree
 lib/rendering.php        | -                      | libreria contenente le funzioni di rendering
-inc/scelta.php           | tpl/scelta.html        | codice custom e template di scelta della figura
-inc/form.php             | tpl/form.html          | codice custom e template di inserimento dei dati della figura
-inc/risultati.php        | tpl/risultati.html     | codice custom e template di presentazione dei risultati del calcolo
+opt/scelta.php           | tpl/scelta.html        | codice custom e template di scelta della figura
+opt/form.php             | tpl/form.html          | codice custom e template di inserimento dei dati della figura
+opt/risultati.php        | tpl/risultati.html     | codice custom e template di presentazione dei risultati del calcolo
 .htaccess                | -                      | file di routing
 index.php                | -                      | file principale dell'applicazione
 
 Il file index.php conterrà un elenco in forma di array associativo delle varie pagine che compongono l'applicazione, e in base a quello andrà a richiamare
 i file specifici della pagina richiesta. Lo scopo del file .htaccess è quello di reindirizzare tutte le richieste di tipo /nomefile.html a /index.php?pagina=<pag>
-in modo da consentire al file index.php di gestire correttamente la route.
+in modo da consentire al file index.php di gestire correttamente la route. Si supponga ad esempio di avere un file .htaccess così formato:
+
+```
+RewriteEngine on
+RewriteRule ^[\/]*([a-zA-Z0-9\.\-\_]+).(html|php) index.php?p=$1 [L,QSA]
+```
+
+Questa semplice regola ci consente di trasformare un url di tipo prova.html in index.php?p=prova il che a sua volta rende possibile l'indirizzamento per route
+alla pagina prova. Dovremo avere, in index.php o in un file inc/pagine.php un array con in chiave gli identificativi di pagina, ad esempio:
+
+```
+$pagine = array(
+    'prova' => array(
+        'contenuto' => array(
+            'titolo' => 'prova',
+            'h1' => 'pagina di prova',
+            ...
+        ),
+        'template' => 'tpl/main.html',
+        'include' => [
+          ...
+        ],
+    ),
+);
+```
+
+Proseguendo il ragionamento, vediamo che ci sono almeno tre compiti relativi alle pagine che possono essere raccolti in un file inc/pagine.php per semplicità:
+
+- dichiarare l'elenco delle pagine
+- valorizzare la pagina di default se nessuna pagina è specificata
+- predisporre il menù di navigazione
+
+Consideriamo la cartella inc/ come il luogo dove inserire i file che vanno inclusi in ogni pagina e opt/ la cartella dove inserire i file che devono essere inclusi
+solo in caso ci si trovi su una determinata pagina. In questo modo potremo includere automaticamente tutte le librerie e tutti i file inclusi con dei glob() e dei
+foreach(). Si immagini un index.php che inizi con il seguente codice:
+
+```
+foreach (glob("lib/*.php") as $file) {
+    require_once $file;
+}
+
+foreach (glob("inc/*.php") as $file) {
+    require_once $file;
+}
+
+foreach( $p['include'] as $file ) {
+    require_once $file;
+}
+```
+
+Si vede bene che partendo in questo modo è possibile evitare di includere manualmente i singoli file. La variabile $p rappresenta la pagina corrente, in riferimento
+all'array visto sopra.
+
+Riguardo il rendering dell'HTML non c'è molto da aggiungere in questa sede, essendo l'argomento trattato altrove; basti dire che conviene effettuare il rendering del
+template principale nel file index.php il che esaurisce i suoi compiti nell'architettura dell'applicazione.
+
+## l'approccio model, view, controller
+Andando più nel dettaglio per quanto riguarda l'analisi dell'architettura dell'applicazione, si vedrà che è necessario dividere in qualche modo le tre funzioni principali
+relative ad ogni categoria di dati che si gestisce con l'applicazione. In particolare, possiamo enucleare i seguenti:
+
+- gestione delle entità (inserimento, modifica, cancellazione)
+- gestione degli input utente relativi alle entità (cosa fare quando l'utente invia un determinato input)
+- gestire la visualizzazione delle entità e le relative interfacce
+
+Questi tre compiti prendono il nome rispettivamente di model, controller e view; qui non si intende implementare strettamente il pattern MVC ma più che altro sfruttarlo
+come canovaccio per organizzare i vari compiti fra i file. In particolare assegneremo:
+
+- al model il compito di dichiarare tutte le funzioni necessarie come aggiungi(), modifica(), elimina(), elenca() eccetera
+- al controller il compito di chiamare le funzioni appropriate in base all'input dato dall'utente con uno switch( $_REQUEST['azione'] ) { ... }
+- alla view il compito di fare il rendering del template appropriato per la pagina, da passare poi al rendering generale di index.php
+
+La struttura finale della nostra applicazione quindi potrebbe essere:
+
+file                                              | spiegazione
+--------------------------------------------------|-----------------------------------------------------------------------------------------------------
+.htaccess                                         | file per le regole di routing
+index.php                                         | file principale dell'applicazione (include gli altri file e fa il rendering generale)
+tpl/main.html                                     | il template generale dell'applicazione
+tpl/prova.lista.html                              | il template specifico per la lista delle entità di prova
+tpl/prova.form.html                               | il template specifico per il form delle entità di prova
+inc/db.php                                        | il file che si occupa della connessione al database
+inc/pagine.php                                    | il file che si occupa di dichiarare le pagine, gestire la pagina di default e creare il menù
+lib/rendering.php                                 | la libreria per il rendering dei template
+opt/prova.model.php                               | include specifico per l'entità di prova contenente le funzioni per la gestione
+opt/prova.controller.php                          | include specifico per l'entità di prova contenente la gestione degli input utente
+opt/prova.view.php                                | include specifico per l'entità di prova contenente le logiche di rendering specifiche per l'entità
+
+
+
 
