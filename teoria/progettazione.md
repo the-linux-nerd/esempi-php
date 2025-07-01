@@ -194,6 +194,6 @@ opt/prova.model.php                               | include specifico per l'enti
 opt/prova.controller.php                          | include specifico per l'entità di prova contenente la gestione degli input utente
 opt/prova.view.php                                | include specifico per l'entità di prova contenente le logiche di rendering specifiche per l'entità
 
-
+Un esempio di programma realizzato con un approccio simile a quello appena visto si può trovare nella lezione 10.01.
 
 
