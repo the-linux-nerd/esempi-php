@@ -12,6 +12,9 @@
 
     // array per i dati da passare al template
     $dati = [];
+    $dati['lista_cani'] = '';
+    $dati['id_cane'] = '';
+    $dati['nome_cane'] = '';
 
     /**
      * inclusione librerie
@@ -33,11 +36,48 @@
      * 
      */
     if( isset($_POST['nome']) && empty($_POST['id']) ) {
+        $id = md5( microtime(true) );
         $cane = [
-            'id' => md5( microtime(true) ),
+            'id' => $id,
             'nome' => $_POST['nome']
         ];
-        $lista[] = $cane;
+        $lista[$id] = $cane;
+        file_put_contents('db/cani.db', serialize($lista));
+    }
+
+    /**
+     * eliminazione di un cane
+     * -----------------------
+     * 
+     * 
+     */
+    if( isset($_GET['elimina']) ) {
+        unset( $lista[$_GET['elimina']] );
+        file_put_contents('db/cani.db', serialize($lista));
+    }
+
+    /**
+     * caricamento di un cane per la modifica
+     * --------------------------------------
+     * 
+     * 
+     */
+    if( isset($_GET['modifica']) ) {
+        if( isset($lista[$_GET['modifica']]) ) {
+            $dati['id_cane'] = $lista[$_GET['modifica']]['id'];
+            $dati['nome_cane'] = $lista[$_GET['modifica']]['nome'];
+        }
+    }
+
+    /**
+     * modifica di un cane
+     * -------------------
+     * 
+     * 
+     */
+    if( isset($_POST['nome']) && !empty($_POST['id']) ) {
+        $lista[$_POST['id']]['id'] = $_POST['id'];
+        $lista[$_POST['id']]['nome'] = $_POST['nome'];
         file_put_contents('db/cani.db', serialize($lista));
     }
 
@@ -47,9 +87,10 @@
      * 
      * 
      */
-    $dati['lista_cani'] = '';
-    foreach($lista as $cane) {
-        $dati['lista_cani'] .= \Render\render('tpl/cani.tr.html', $cane);
+    if( is_array($lista) ) {
+        foreach($lista as $cane) {
+            $dati['lista_cani'] .= \Render\render('tpl/cani.tr.html', $cane);
+        }
     }
 
     /**
