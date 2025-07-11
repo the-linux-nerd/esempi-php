@@ -1,0 +1,32 @@
+<!-- template per la pagina persone -->
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <title>Gestione Persone</title>
+        <link rel="stylesheet" type="text/css" href="css/stile.css">
+    </head>
+    <body>
+        <h1>Gestione Persone</h1>
+        <p>Qui puoi gestire le informazioni sulle persone.</p>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{lista_persone}}
+            </tbody>
+        </table>
+        <hr>
+        <form action="persone.php" method="post">
+            <input type="text" name="id" placeholder="ID della persona">
+            <input type="text" name="nome" placeholder="Nome della persona" required>
+            <input type="submit" value="Aggiungi Persona">
+        </form>
+        <hr>
+        <p><a href="index.php">Torna alla pagina principale</a></p>
+    </body>
+</html>

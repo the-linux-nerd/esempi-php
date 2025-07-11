@@ -1,0 +1,30 @@
+<!-- template per la pagina vaccinazioni -->
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <title>Gestione Vaccinazioni</title>
+        <link rel="stylesheet" type="text/css" href="css/stile.css">
+    </head>
+    <body>
+        <h1>Gestione Vaccinazioni</h1>
+        <p>Qui puoi gestire le informazioni sulle vaccinazioni.</p>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Cane</th>
+                    <th>Vaccinazione</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{lista_vaccinazioni}}
+            </tbody>
+        </table>
+        <hr>
+        <form action="vaccinazioni.php" method="post">
+        </form>
+        <hr>
+        <p><a href="index.php">Torna alla pagina principale</a></p>
+    </body>
+</html>
