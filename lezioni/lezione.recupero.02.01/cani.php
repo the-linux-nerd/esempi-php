@@ -19,26 +19,28 @@
     // librerie
     require_once 'lib/render.php';
 
+    // file inclusi
+    require_once 'inc/db.php';
+
     // model
-    require_once 'mod/cani.php';
+    // require_once 'mod/cani.php';
 
     // controller
-    require_once 'cnt/cani.php';
+    // require_once 'cnt/cani.php';
 
     /**
-     * renderizzazione lista cani
-     * --------------------------
+     * renderizzazione output
+     * ----------------------
      * 
      * 
      */
+
+    // renderizzazione lista cani
     if( is_array($lista) ) {
         foreach($lista as $cane) {
             $dati['lista_cani'] .= \Render\render('tpl/cani.tr.html', $cane);
         }
     }
 
-    /**
-     * rendering del template
-     * 
-     */
+    // renderizzazione template principale
     echo \Render\render('tpl/cani.html', $dati);

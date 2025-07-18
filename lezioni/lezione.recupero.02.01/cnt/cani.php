@@ -17,13 +17,6 @@
     $dati['nome_cane'] = '';
 
     /**
-     * inclusione librerie
-     * -------------------
-     * 
-     */
-    require_once 'lib/render.php';
-
-    /**
      * caricamento lista cani
      * ----------------------
      * 
