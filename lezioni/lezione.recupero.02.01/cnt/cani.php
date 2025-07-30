@@ -12,30 +12,24 @@
 
     // array per i dati da passare al template
     $dati = [];
+    $dati['status'] = 'nessuna operazione in corso';
     $dati['lista_cani'] = '';
     $dati['id_cane'] = '';
     $dati['nome_cane'] = '';
-
-    /**
-     * caricamento lista cani
-     * ----------------------
-     * 
-     */
-    $lista = unserialize(file_get_contents('db/cani.db')) ?? [];
+    $dati['data_nascita_cane'] = '';
 
     /**
      * inserimento di un nuovo cane
      * 
      * 
      */
-    if( isset($_POST['nome']) && empty($_POST['id']) ) {
-        $id = md5( microtime(true) );
-        $cane = [
-            'id' => $id,
-            'nome' => $_POST['nome']
-        ];
-        $lista[$id] = $cane;
-        file_put_contents('db/cani.db', serialize($lista));
+    if( isset($_POST['nome']) && isset($_POST['data_nascita']) && empty($_POST['id']) ) {
+        $dati['status'] = 'inserimento di un nuovo cane';
+        if( \Cani\aggiungi($_POST['nome'], $_POST['data_nascita']) ) {
+            $dati['status'] = 'cane aggiunto con successo';
+        } else {
+            $dati['status'] = 'errore nell\'aggiunta del cane';
+        }
     }
 
     /**
@@ -45,8 +39,12 @@
      * 
      */
     if( isset($_GET['elimina']) ) {
-        unset( $lista[$_GET['elimina']] );
-        file_put_contents('db/cani.db', serialize($lista));
+        $dati['status'] = 'eliminazione di un cane';
+        if( \Cani\elimina($_GET['elimina']) ) {
+            $dati['status'] = 'cane eliminato con successo';
+        } else {
+            $dati['status'] = 'errore nell\'eliminazione del cane';
+        }
     }
 
     /**
@@ -56,9 +54,14 @@
      * 
      */
     if( isset($_GET['modifica']) ) {
-        if( isset($lista[$_GET['modifica']]) ) {
-            $dati['id_cane'] = $lista[$_GET['modifica']]['id'];
-            $dati['nome_cane'] = $lista[$_GET['modifica']]['nome'];
+        $dati['status'] = 'lettura dei dati del cane da modificare';
+        $cane = \Cani\dettagli($_GET['modifica']);
+        if( !empty($cane) ) {
+            $dati['id_cane'] = $cane['id'];
+            $dati['nome_cane'] = $cane['nome'];
+            $dati['data_nascita_cane'] = $cane['data_nascita'];
+        } else {
+            $dati['status'] = 'errore nel recupero del cane con id ' . $_GET['modifica'];
         }
     }
 
@@ -68,26 +71,18 @@
      * 
      * 
      */
-    if( isset($_POST['nome']) && !empty($_POST['id']) ) {
-        $lista[$_POST['id']]['id'] = $_POST['id'];
-        $lista[$_POST['id']]['nome'] = $_POST['nome'];
-        file_put_contents('db/cani.db', serialize($lista));
-    }
-
-    /**
-     * renderizzazione lista cani
-     * --------------------------
-     * 
-     * 
-     */
-    if( is_array($lista) ) {
-        foreach($lista as $cane) {
-            $dati['lista_cani'] .= \Render\render('tpl/cani.tr.html', $cane);
+    if( isset($_POST['nome']) && isset($_POST['data_nascita']) && !empty($_POST['id']) ) {
+        $dati['status'] = 'modifica di un cane';
+        if( \Cani\modifica($_POST['id'], $_POST['nome'], $_POST['data_nascita']) ) {
+            $dati['status'] = 'cane modificato con successo';
+        } else {
+            $dati['status'] = 'errore nella modifica del cane';
         }
     }
 
     /**
-     * rendering del template
+     * caricamento lista cani
+     * ----------------------
      * 
      */
-    echo \Render\render('tpl/cani.html', $dati);
+    $lista = \Cani\lista();

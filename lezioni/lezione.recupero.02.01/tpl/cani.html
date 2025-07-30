@@ -13,6 +13,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Nome</th>
+                    <th>Data di Nascita</th>
                     <th></th>
                 </tr>
             </thead>
@@ -24,8 +25,11 @@
         <form action="cani.php" method="post">
             <input type="text" name="id" placeholder="ID del cane" value="{{id_cane}}">
             <input type="text" name="nome" placeholder="Nome del cane" required value="{{nome_cane}}">
+            <input type="date" name="data_nascita" placeholder="Data di nascita" value="{{data_nascita_cane}}">
             <input type="submit" value="Aggiungi Cane">
         </form>
+        <hr>
+        <p>{{status}}</p>
         <hr>
         <p><a href="index.php">Torna alla pagina principale</a></p>
     </body>

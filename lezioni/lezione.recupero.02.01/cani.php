@@ -18,15 +18,13 @@
 
     // librerie
     require_once 'lib/render.php';
-
-    // file inclusi
-    require_once 'inc/db.php';
+    require_once 'lib/db.php';
 
     // model
-    // require_once 'mod/cani.php';
+    require_once 'mod/cani.php';
 
     // controller
-    // require_once 'cnt/cani.php';
+    require_once 'cnt/cani.php';
 
     /**
      * renderizzazione output
