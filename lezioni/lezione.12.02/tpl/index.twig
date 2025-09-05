@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>Twig test</title>
+    </head>
+    <body>
+        <h1>ciao {{ nome }}!</h1>
+        {% if variabile %}
+            <p>La variabile è vera!</p>
+        {% else %}
+            <p>La variabile è falsa!</p>
+        {% endif %}
+        <p>Hai inserito i seguenti numeri:
+        {% for numero in numeri %}
+            {{ numero }}{% if not loop.last %}, {% endif %}
+        {% endfor %}
+        </p>
+        <ul>
+        {% for persona in lista %}
+            <li>{{ persona.nome }} {{ persona.cognome }}</li>
+        {% endfor %}
+        </ul>
+        <select>
+        {% for chiave, valore in colori %}
+            <option value="{{ chiave }}">{{ valore }}</option>
+        {% endfor %}
+        </select>
+    </body>
+</html>
