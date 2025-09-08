@@ -25,3 +25,4 @@
             'label' => $value['contenuto']['titolo']
         );
     }
+
