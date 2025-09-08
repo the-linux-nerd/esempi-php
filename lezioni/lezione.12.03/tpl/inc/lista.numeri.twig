@@ -1,0 +1,7 @@
+<!-- Twig: {{ _self }} -->
+<p>Hai inserito i seguenti numeri:
+{% for numero in numeri %}
+    {{ numero }}{% if not loop.last %}, {% endif %}
+{% endfor %}
+</p>
+<!-- Twig fine: {{ _self }} -->

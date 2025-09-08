@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>Twig test</title>
+    </head>
+    <body>
+        <h1>ciao {{ nome }}!</h1>
+
+        <p>Hai inserito i seguenti numeri:
+        {% for numero in numeri %}
+            {{ numero }}{% if not loop.last %}, {% endif %}
+        {% endfor %}
+        </p>
+
+        <p>Hai inserito i seguenti numeri: {{ numeri|join(', ') }}</p>
+
+        {{ include('inc/lista.numeri.twig') }}
+
+    </body>
+</html>
