@@ -6,6 +6,10 @@
         require_once $file;
     }
 
+    foreach (glob("conf/*.php") as $file) {
+        require_once $file;
+    }
+
     foreach (glob("inc/*.php") as $file) {
         require_once $file;
     }

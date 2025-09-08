@@ -1,3 +1,4 @@
+{% import "lib/navigation.twig" as nav %}
 <!DOCTYPE html>
 <html lang="it">
     <head>
@@ -11,13 +12,7 @@
         <header>
             {% block header %}{% endblock %}
             <hr>
-            <nav>
-                <ul class="menu">
-                    {% for voce in menu %}
-                    <li><a href="{{ voce.url }}">{{ voce.label }}</a></li>
-                    {% endfor %}
-                </ul>
-            </nav>
+            <nav>{{ nav.nav(menu) }}</nav>
             <hr>
         </header>
         <main>
