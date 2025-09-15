@@ -1,6 +1,7 @@
 <?php
 
     require_once 'lib/ext/autoload.php';
+    require_once 'mod/pagine.php';
 
     foreach (glob("lib/*.php") as $file) {
         require_once $file;

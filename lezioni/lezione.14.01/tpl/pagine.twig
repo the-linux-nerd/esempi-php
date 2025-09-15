@@ -5,3 +5,48 @@
 {% block header %}
     <h1>gestione pagine</h1>
 {% endblock %}
+{% block main %}
+<p>Qui puoi gestire le informazioni sulle pagine.</p>
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>URL</th>
+            <th>template</th>
+            <th>titolo</th>
+            <th>h1</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pagina in lista %}
+        <tr>
+            <td>{{pagina.id}}</td>
+            <td>{{pagina.url}}</td>
+            <td>{{pagina.template}}</td>
+            <td>{{pagina.contenuto.titolo}}</td>
+            <td>{{pagina.contenuto.h1}}</td>
+            <td>
+                <a href="?elimina={{pagina.id}}">elimina</a>
+                <a href="?modifica={{pagina.id}}">modifica</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<hr>
+<form action="lista-pagine.html" method="post">
+    <input type="text" name="id" placeholder="ID della pagina" value="{{dati.id_pagina}}">
+    <input type="text" name="url" placeholder="URL della pagina" required value="{{dati.url_pagina}}">
+    <input type="text" name="template" placeholder="Template della pagina" value="{{dati.template_pagina}}">
+    <br>
+    <input type="text" name="titolo" placeholder="Titolo della pagina" value="{{dati.titolo_pagina}}">
+    <input type="text" name="h1" placeholder="H1 della pagina" value="{{dati.h1_pagina}}">
+    <br>
+    <textarea name="include" placeholder="Include della pagina"></textarea>
+    <br>
+    <input type="submit" value="Aggiungi Pagina">
+</form>
+<hr>
+<p>{{dati.status}}</p>
+{% endblock %}
