@@ -45,7 +45,14 @@
             $sql = "DELETE FROM pagine WHERE id = ?";
             $stmt = mysqli_prepare( \DB\getConnection(), $sql );
             mysqli_stmt_bind_param( $stmt, 'i', $id );
-            return mysqli_stmt_execute( $stmt );
+            $res = mysqli_stmt_execute( $stmt );
+            if( $res ) {
+                $sql = "DELETE FROM pagine_include WHERE id_pagina = ?";
+                $stmt = mysqli_prepare( \DB\getConnection(), $sql );
+                mysqli_stmt_bind_param( $stmt, 'i', $id );
+                mysqli_stmt_execute( $stmt );
+            }
+            return $res;
         } else {
             return false;
         }

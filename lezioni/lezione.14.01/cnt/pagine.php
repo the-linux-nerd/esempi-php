@@ -19,6 +19,7 @@
     $p['contenuto']['dati']['template_pagina'] = '';
     $p['contenuto']['dati']['titolo_pagina'] = '';
     $p['contenuto']['dati']['h1_pagina'] = '';
+    $p['contenuto']['dati']['include_pagina'] = '';
 
     /**
      * inserimento di una nuova pagina
@@ -27,7 +28,8 @@
      */
     if( isset($_POST['url']) && isset($_POST['template']) && isset( $_POST['titolo'] ) && isset( $_POST['h1'] ) && empty($_POST['id']) ) {
         $p['contenuto']['dati']['status'] = 'inserimento di una nuova pagina';
-        if( \Pagine\aggiungi($_POST['url'], $_POST['template'], $_POST['titolo'], $_POST['h1']) ) {
+        $include = ( !empty($_POST['include']) ) ? explode( "\n", $_POST['include'] ) : [];
+        if( \Pagine\aggiungi($_POST['url'], $_POST['template'], $_POST['titolo'], $_POST['h1'], $include) ) {
             $p['contenuto']['dati']['status'] = 'pagina aggiunta con successo';
         } else {
             $p['contenuto']['dati']['status'] = 'errore nell\'aggiunta della pagina';
@@ -64,6 +66,7 @@
             $p['contenuto']['dati']['template_pagina'] = $pagina['template'];
             $p['contenuto']['dati']['titolo_pagina'] = $pagina['contenuto']['titolo'] ?? '';
             $p['contenuto']['dati']['h1_pagina'] = $pagina['contenuto']['h1'] ?? '';
+            $p['contenuto']['dati']['include_pagina'] = implode( "\n", $pagina['include'] );
             $p['contenuto']['dati']['status'] = 'pagina caricata con successo';
         } else {
             $p['contenuto']['dati']['status'] = 'errore nel recupero della pagina con id ' . $_GET['modifica'];
@@ -78,7 +81,12 @@
      */
     if( isset($_POST['url']) && isset($_POST['template']) && !empty($_POST['id']) ) {
         $p['contenuto']['dati']['status'] = 'modifica di una pagina';
-        if( \Pagine\modifica($_POST['id'], $_POST['url'], $_POST['template'], $_POST['titolo'], $_POST['h1']) ) {
+        if( !empty($_POST['include']) ) {
+            $include = explode( "\n", $_POST['include'] );
+        } else {
+            $include = [];
+        }
+        if( \Pagine\modifica($_POST['id'], $_POST['url'], $_POST['template'], $_POST['titolo'], $_POST['h1'], $include) ) {
             $p['contenuto']['dati']['status'] = 'pagina modificata con successo';
         } else {
             $p['contenuto']['dati']['status'] = 'errore nella modifica della pagina';
