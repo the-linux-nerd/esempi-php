@@ -1,0 +1,22 @@
+{% import "lib/navigation.twig" as nav %}
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        {% block head %}
+        <title>Lezione 13.01</title>
+        {% endblock %}
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+        <header>
+            {% block header %}{% endblock %}
+            <hr>
+            <nav>{{ nav.nav(menu) }}</nav>
+            <hr>
+        </header>
+        <main>
+            {% block main %}{% endblock %}
+        </main>
+    </body>
+</html>

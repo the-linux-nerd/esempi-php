@@ -1,0 +1,42 @@
+{% extends "ext/main.twig" %}
+{% block head %}
+    <title>Gestione Cani</title>
+{% endblock %}
+{% block header %}
+    <h1>gestione cani</h1>
+{% endblock %}
+{% block main %}
+<p>Qui puoi gestire le informazioni sui cani.</p>
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Data di Nascita</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for cane in lista %}
+        <tr>
+            <td>{{cane.id}}</td>
+            <td>{{cane.nome}}</td>
+            <td>{{cane.data_nascita}}</td>
+            <td>
+                <a href="?elimina={{cane.id}}">elimina</a>
+                <a href="?modifica={{cane.id}}">modifica</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<hr>
+<form action="lista-cani.html" method="post">
+    <input type="text" name="id" placeholder="ID del cane" value="{{dati.id_cane}}">
+    <input type="text" name="nome" placeholder="Nome del cane" required value="{{dati.nome_cane}}">
+    <input type="date" name="data_nascita" placeholder="Data di nascita" value="{{dati.data_nascita_cane}}">
+    <input type="submit" value="Aggiungi Cane">
+</form>
+<hr>
+<p>{{dati.status}}</p>
+{% endblock %}

@@ -1,0 +1,7 @@
+{% macro nav(menu) %}
+    <ul class="menu">
+        {% for voce in menu %}
+            <li><a href="{{ voce.url }}">{{ voce.label }}</a></li>
+        {% endfor %}
+    </ul>
+{% endmacro %}
