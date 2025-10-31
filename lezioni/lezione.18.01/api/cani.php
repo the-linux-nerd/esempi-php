@@ -35,6 +35,11 @@
                 $message['nome'] = $input['nome'];
             }
 
+            // se nel json che ricevo c'è la data di nascita
+            if (isset($input['data_nascita'])) {
+                $message['data_nascita'] = $input['data_nascita'];
+            }
+
             break;
 
         case 'PUT':
