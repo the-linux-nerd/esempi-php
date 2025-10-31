@@ -9,7 +9,7 @@
 <body>
     <h1>inserimento numeri</h1>
     <form action="{{ url('/submit-somma') }}" method="POST">
-        @csrf
+        @csrf\
         <label for="num1">Numero 1:</label>
         <input type="number" id="num1" name="num1" required>
         <br>
