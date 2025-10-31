@@ -24,7 +24,8 @@
 <script>
     function scriviCane( id ) {
         const data = {
-            nome: document.getElementById('nome').value
+            nome: document.getElementById('nome').value,
+            data_nascita: document.getElementById('data_nascita').value
         };
 
         fetch( '/lezioni/lezione.18.01/api/cani/' + id, {
