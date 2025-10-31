@@ -27,6 +27,14 @@
             // implementare
             $message = ["metodo" => "POST"];
 
+            // decodifico il json ricevuto
+            $input = json_decode(file_get_contents('php://input'), true);
+
+            // se nel json che ricevo c'è il nome
+            if (isset($input['nome'])) {
+                $message['nome'] = $input['nome'];
+            }
+
             break;
 
         case 'PUT':
