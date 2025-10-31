@@ -6,9 +6,9 @@
     <title>Esempio GET</title>
 </head>
 <body>
-    <h1>Esempio di richiesta POST</h1>
+    <h1>Esempio di richiesta PUT</h1>
     <fieldset>
-        <legend>scrittura cane</legend>
+        <legend>sovrascrittura cane</legend>
         <label for="id">ID:</label>
         <input type="text" id="id" name="id" required>
         <br><br>
@@ -18,18 +18,18 @@
         <label for="data_nascita">Data di nascita:</label>
         <input type="date" id="data_nascita" name="data_nascita" required>
         <br><br>
-        <input type="button" value="Invia" onclick="scriviCane( document.getElementById('id').value );">
+        <input type="button" value="Invia" onclick="sovrascriviCane( document.getElementById('id').value );">
     </fieldset>
 </body>
 <script>
-    function scriviCane( id ) {
+    function sovrascriviCane( id ) {
         const data = {
             nome: document.getElementById('nome').value,
             data_nascita: document.getElementById('data_nascita').value
         };
 
         fetch( '/lezioni/lezione.18.01/api/cani/' + id, {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
